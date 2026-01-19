@@ -55,7 +55,7 @@ def generate_yearly_flow_plot(cleaned_data, unique_years, location, max_flow_val
                     labels=['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
     plt.xlabel('Month')
     plt.ylabel('Flow (cfs)')
-    plt.ylim(-5, max_flow_val + max_flow_val*0.5)
+    plt.ylim(-5, max_flow_val + max_flow_val*0.25)
     plt.title(f'Yearly Flow Data for Site: {location}')
     #make legend outside of plot
     plt.legend(ncol=8)
