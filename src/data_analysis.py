@@ -1,14 +1,16 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 from scipy import stats
-
+import os
 from utils.process_data import load_data, clean_data, linear_regression_analysis, linear_regression_analysis_max, generate_yearly_flow_plot, generate_box_whisker_plot
 
 
-paths = [r'C:\Users\crossa\GitHub\SantaAna_Hydrology\Data\rio_above.csv']
-
-
-
+paths = [r'C:\Users\smitha\github\SantaAna_Hydrology\Data\rio_above.csv']
+current_dir=os.getcwd()
+print(current_dir)
+folders_dir=os.path.join(current_dir,"Images")
+if not os.path.exists(folders_dir):
+    os.makedirs(folders_dir)
 
 
 for path in paths:
@@ -31,7 +33,7 @@ for path in paths:
     plt.text(0.85, 0.95, f'Slope: {slope:.2f} cfs/year', transform=plt.gca().transAxes, fontsize=10, verticalalignment='top')
     plt.grid(True)
     plt.show()
-
+    plt.savefig(f"{folders_dir}/{location}_AverageRegression.png")
     plt.plot(max_flow['Year'], max_flow['max_flow'], marker='o')
     plt.plot(max_flow['Year'], max_flow['regression_line'], color='red', linestyle='--')
     plt.title(f'Annual Maximum Flow with Linear Regression for Site: {location}')
