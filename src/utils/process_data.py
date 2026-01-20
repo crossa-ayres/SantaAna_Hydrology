@@ -5,7 +5,8 @@ from scipy import stats
 def load_data(file_path):
     """Load data from a CSV file into a pandas DataFrame."""
 
-    return pd.read_csv(file_path)
+    return pd.read_csv(file_path, header=0)
+
 
 def clean_data(df):
     """Perform basic data cleaning on the DataFrame."""
@@ -43,6 +44,9 @@ def generate_yearly_flow_plot(cleaned_data, unique_years, location, max_flow_val
                 #plot flow data in the Flow (cfs) column as individual lines for each year
                 yearly_data = cleaned_data[cleaned_data['Year'] == year]
                 plt.plot(yearly_data["DayOfYear"], yearly_data['Flow (cfs)'], label=str(year))
+                #make lines warmer colors for recent years and cooler colors for older years
+                color_value = (year - unique_years.min()) / (unique_years.max() - unique_years.min())
+                plt.gca().lines[-1].set_color(plt.cm.coolwarm(color_value)) 
                 #label the x axis with the months
                 plt.xticks(ticks=[1, 32, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335], 
                         labels=['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
@@ -50,6 +54,9 @@ def generate_yearly_flow_plot(cleaned_data, unique_years, location, max_flow_val
             #plot flow data in the Flow (cfs) column as individual lines for each year
             yearly_data = cleaned_data[cleaned_data['Year'] == year]
             plt.plot(yearly_data["DayOfYear"], yearly_data['Flow (cfs)'], label=str(year))
+            #make lines warmer colors for recent years and cooler colors for older years
+            color_value = (year - unique_years.min()) / (unique_years.max() - unique_years.min())
+            plt.gca().lines[-1].set_color(plt.cm.coolwarm(color_value)) 
             #label the x axis with the months
             plt.xticks(ticks=[1, 32, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335], 
                     labels=['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])

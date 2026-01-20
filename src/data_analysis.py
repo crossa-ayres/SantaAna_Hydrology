@@ -33,7 +33,7 @@ for path in paths:
     plt.text(0.85, 0.95, f'Slope: {slope:.2f} cfs/year', transform=plt.gca().transAxes, fontsize=10, verticalalignment='top')
     plt.grid(True)
     plt.show()
-    plt.savefig(f"{folders_dir}/{location}_AverageRegression.png")
+    
     plt.plot(max_flow['Year'], max_flow['max_flow'], marker='o')
     plt.plot(max_flow['Year'], max_flow['regression_line'], color='red', linestyle='--')
     plt.title(f'Annual Maximum Flow with Linear Regression for Site: {location}')
@@ -47,5 +47,3 @@ for path in paths:
     plt.show()
 
     generate_yearly_flow_plot(cleaned_data, unique_years, location, max_flow_val)
-
-
