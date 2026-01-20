@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from scipy import stats
 import os
 from utils.process_data import load_data, clean_data, linear_regression_analysis, linear_regression_analysis_max, generate_yearly_flow_plot, generate_box_whisker_plot
-
+import seaborn as sns
 
 paths = [r'C:\Users\smitha\github\SantaAna_Hydrology\Data\rio_above.csv']
 current_dir=os.getcwd()

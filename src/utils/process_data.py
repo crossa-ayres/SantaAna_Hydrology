@@ -1,6 +1,8 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 from scipy import stats
+import seaborn as sns
+
 
 def load_data(file_path):
     """Load data from a CSV file into a pandas DataFrame."""
@@ -43,20 +45,18 @@ def generate_yearly_flow_plot(cleaned_data, unique_years, location, max_flow_val
             if year % 2 == 0:
                 #plot flow data in the Flow (cfs) column as individual lines for each year
                 yearly_data = cleaned_data[cleaned_data['Year'] == year]
-                plt.plot(yearly_data["DayOfYear"], yearly_data['Flow (cfs)'], label=str(year))
-                #make lines warmer colors for recent years and cooler colors for older years
-                color_value = (year - unique_years.min()) / (unique_years.max() - unique_years.min())
-                plt.gca().lines[-1].set_color(plt.cm.coolwarm(color_value)) 
+                #plt.plot(yearly_data["DayOfYear"], yearly_data['Flow (cfs)'], label=str(year))
+                #using seaborn plot data using viridis color palette
+                plt.plot(yearly_data["DayOfYear"], yearly_data['Flow (cfs)'], label=str(year), color=sns.color_palette("viridis", len(unique_years))[list(unique_years).index(year)])
                 #label the x axis with the months
                 plt.xticks(ticks=[1, 32, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335], 
                         labels=['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
         else:
             #plot flow data in the Flow (cfs) column as individual lines for each year
             yearly_data = cleaned_data[cleaned_data['Year'] == year]
-            plt.plot(yearly_data["DayOfYear"], yearly_data['Flow (cfs)'], label=str(year))
-            #make lines warmer colors for recent years and cooler colors for older years
-            color_value = (year - unique_years.min()) / (unique_years.max() - unique_years.min())
-            plt.gca().lines[-1].set_color(plt.cm.coolwarm(color_value)) 
+            #plt.plot(yearly_data["DayOfYear"], yearly_data['Flow (cfs)'], label=str(year))
+            #using seaborn plot data using viridis color palette
+            plt.plot(yearly_data["DayOfYear"], yearly_data['Flow (cfs)'], label=str(year), color=sns.color_palette("viridis", len(unique_years))[list(unique_years).index(year)])
             #label the x axis with the months
             plt.xticks(ticks=[1, 32, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335], 
                     labels=['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'])
